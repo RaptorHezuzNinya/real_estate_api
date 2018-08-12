@@ -1,0 +1,3 @@
+{
+    "python.pythonPath": "${workspaceFolder}/realEstateApi_venv/bin/python"
+}
