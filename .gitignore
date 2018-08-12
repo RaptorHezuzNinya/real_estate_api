@@ -1,4 +1,5 @@
 venv
 *.pyc
-.DS_Storereal_estate_API_venv
+.DS_Store
+real_estate_API_venv
 README.md
