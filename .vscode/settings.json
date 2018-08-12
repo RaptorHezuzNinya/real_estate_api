@@ -9,6 +9,7 @@
         "README.md": true,
         "**/notes.md": true,
         "data": true,
-        "**/runServer.sh": true
+        "**/runServer.sh": true,
+        "__pycache__": true
     }
 }
