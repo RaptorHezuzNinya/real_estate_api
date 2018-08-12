@@ -7,3 +7,4 @@ real_estate_API_venv
 notes.md
 /data
 runServer.sh
+/__pycache__

@@ -8,6 +8,7 @@
         "**/real_estate_API_venv": true,
         "README.md": true,
         "**/notes.md": true,
-        "data": true
+        "data": true,
+        "**/runServer.sh": true
     }
 }
