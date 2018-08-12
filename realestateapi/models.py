@@ -7,12 +7,9 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True)
     password = db.Column(db.String(120), nullable=False)
 
-    def __init__(self, email, password):
-        self.email = email
-        self.password = password
-
-    # def __repr__(self):
-    #     return '<E-mail %r>' % self.email
+    # def __init__(self, email, password):
+    #     self.email = email
+    #     self.password = password
 
     def __repr__(self):
         return f"User('{self.id}','{self.email}')"
@@ -20,6 +17,7 @@ class User(db.Model):
 class Tenant(db.Model):
     __tablename__ = "tenants"
     id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), unique=True)    
     firstName = db.Column(db.String(25), nullable=False)    
     lastName = db.Column(db.String(35), nullable=False)    
     iban = db.Column(db.String(35), nullable=False)    
@@ -38,4 +36,14 @@ class Payment(db.Model):
     
     def __repr__(self):
         return f"Payments('{self.id}', '{self.iban}, '{self.rent}','{self.account_holder}')"
-    
+
+class Upload(db.Model):
+    __tablename__ = "uploads"
+    id = db.Column(db.Integer, primary_key=True)
+    json_file = db.Column(db.JSON)
+
+    def __init__(self, json_file):
+        self.json_file = json_file
+
+    def __repr__(self):
+        return f"Uploads('{self.id}', '{self.json_file}')"
