@@ -1,3 +1,13 @@
 {
-    "python.pythonPath": "${workspaceFolder}/realEstateApi_venv/bin/python"
+    "python.pythonPath": "${workspaceFolder}/real_estate_API_venv/bin/python",
+    "files.exclude": {
+        "**/venv": true,
+        "**/*.pyc": true,
+        "**/.DS_Store": true,
+        "**/.vscode": true,
+        "**/real_estate_API_venv": true,
+        "README.md": true,
+        "**/notes.md": true,
+        "data": true
+    }
 }

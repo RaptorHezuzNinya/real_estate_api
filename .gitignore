@@ -1,7 +1,9 @@
 venv
 *.pyc
 .DS_Store
+.vscode
 real_estate_API_venv
 /README.md
 notes.md
-n /data
+/data
+runServer.sh
