@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from realestateapi.models import User, Tenant, Payment, Upload
 from realestateapi import app, db
-from realestateapi.modules_custom.parser import Parser
+from realestateapi.modules.parser import Parser
 import json
 
 @app.route('/')

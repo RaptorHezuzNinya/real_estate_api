@@ -32,6 +32,7 @@ class Payment(db.Model):
     iban = db.Column(db.String(40), nullable=False)    
     rent = db.Column(db.Float, nullable=False)
     account_holder = db.Column(db.String(45), nullable=False)
+    payment_json = db.Column(db.JSON, nullable=False)
     tenant_id = db.Column(db.Integer, db.ForeignKey('tenants.id'), nullable=False)
     
     def __repr__(self):

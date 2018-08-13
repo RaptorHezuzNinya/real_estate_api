@@ -1,4 +1,4 @@
 class Parser:
-
-    def do_shit(self):
+    
+    def getFile(self):
         return 'unicorn'
