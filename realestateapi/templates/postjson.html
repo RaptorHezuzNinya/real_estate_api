@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Flask app</title>
+    </head>
+    <body>
+        <div>
+            
+            <ul>
+                {% for key, val in var.items() %}
+                    <li>{{key}} :  {{val}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </body>
+</html>
