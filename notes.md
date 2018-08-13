@@ -27,3 +27,26 @@ virtualenv = real_state_API_venv
 
 
 
+<!-- [
+  {
+    "Datum": 20180717,
+    "Naam / Omschrijving": "Hr W Verhoef personal",
+    "Rekening": "NL46INGB0701357983",
+    "Tegenrekening": "NL44INGB0009399983",
+    "Code": "GT",
+    "Af Bij": "Af",
+    "Bedrag (EUR)": "4,50",
+    "MutatieSoort": "Online bankieren",
+    "Mededelingen": "Naam: Hr W Verhoef personal Omschrijving: Terugbetaling printerette dd17 contract IBAN: NL44INGB0009399983"
+  },
+  {
+    "Datum": 20180717,
+    "Naam / Omschrijving": "Hr W Verhoef",
+    "Rekening": "NL46INGB0701357983",
+    "Tegenrekening": "",
+    "Code": "GT",
+    "Af Bij": "Bij",
+    "Bedrag (EUR)": "30,00",
+    "MutatieSoort": "Online bankieren",
+    "Mededelingen": "Van Oranje spaarrekening V76937365"
+  }] -->

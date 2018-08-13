@@ -1,16 +1,6 @@
 {
     "python.pythonPath": "${workspaceFolder}/real_estate_API_venv/bin/python",
     "files.exclude": {
-        "__pycache__": true,
-        "**/venv": true,
-        "**/*.pyc": true,
-        "**/.DS_Store": true,
-        "**/.vscode": true,
-        "**/real_estate_API_venv": true,
-        "README.md": true,
-        "**/notes.md": true,
-        "data": true,
-        "**/runServer.sh": true,
-        "**/__pycache__": true
+        "__pycache__": true
     }
 }
