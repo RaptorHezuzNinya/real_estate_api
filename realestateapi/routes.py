@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from realestateapi.models import User, Tenant, Payment, Upload
 from realestateapi import app, db
 from realestateapi.modules.parser import Parser
@@ -23,14 +23,26 @@ def prereg():
     p = Parser()
     x = p.do_shit()
     return render_template('success.html', var=x)
-    
 
-@app.route('/upload', methods=['POST'])
-def jsonupload():
+@app.route('/uploadfile', methods=['POST'])
+def upload_file():
         if request.method == 'POST':
             file = request.files['file']
-            json_data = json.load(file)
-            new_json = Upload(json_data)
-            db.session.add(new_json)
-            db.session.commit()
-            return render_template('success.html', var=file.filename)
+            json_data = json.load(file) # list containing json object (in python dictionaries)
+            json_dump = json.dumps(json_data)
+            # return render_template('uploadfile.html', var=json_dump)
+            
+            # works -> 
+            # json_data = json.load(file)
+            # new_json = Upload(json_data)
+            # db.session.add(new_json)
+            # db.session.commit()
+            # return render_template('success.html', var=file.filename)
+
+@app.route('/postjson', methods=['POST'])
+def post_json():
+        if request.method == 'POST':
+            req_content = request.get_json()
+            return render_template('postjson.html', var=req_content)
+            # return jsonify(req_content)
+            
