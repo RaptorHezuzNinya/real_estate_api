@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-from realestateapi.models import User, Tenant, Payment, Upload
+from realestateapi.models import Tenant, Payment, Upload
 from realestateapi import app, db
 from realestateapi.modules.parser import Parser
 import json
@@ -31,6 +31,7 @@ def upload_file():
             json_data = json.load(file) # list containing json object (in python dictionaries)
             json_dump = json.dumps(json_data)
             # return render_template('uploadfile.html', var=json_dump)
+            return jsonify(json_data)
             
             # works -> 
             # json_data = json.load(file)
