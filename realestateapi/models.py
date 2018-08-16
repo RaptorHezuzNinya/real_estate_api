@@ -5,10 +5,11 @@ class Tenant(db.Model):
     __tablename__ = "tenants"
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True)
-    first_name = db.Column(db.String(25), nullable=False)    
-    last_name = db.Column(db.String(35), nullable=False)    
+    account_holder = db.Column(db.String(150), unique=True)
+    first_name = db.Column(db.String(25))    
+    last_name = db.Column(db.String(35))    
     iban = db.Column(db.String(35), nullable=False)    
-    rent = db.Column(db.Float, nullable=False)
+    rent = db.Column(db.Float)
     phone = db.Column(db.String(12))
 
     def __repr__(self):
