@@ -50,3 +50,8 @@ virtualenv = real_state_API_venv
     "MutatieSoort": "Online bankieren",
     "Mededelingen": "Van Oranje spaarrekening V76937365"
   }] -->
+
+	json_data = json.load(file) # list containing json object (in python dictionaries)
+	json_dump = json.dumps(json_data)
+	# return render_template('uploadfile.html', var=json_dump)
+return jsonify(json_data)
