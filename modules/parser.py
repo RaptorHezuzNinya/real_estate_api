@@ -1,5 +1,6 @@
 import json
-from realestateapi.models import Tenant
+from realestateapi.models import Tenant, Payment
+from realestateapi import db
 
 
 class Parser:
@@ -8,7 +9,7 @@ class Parser:
         self.loaded_file = loaded_file
         self.tenants = self.get_tenants()
 
-    def check_payments(self):
+    def loop_payments(self):
         for payment in self.loaded_file:
             for key, value in payment.items():
                 self.is_match(key, value, payment)
@@ -18,15 +19,17 @@ class Parser:
         for tenant in tenants:
             if k == 'Tegenrekening':
                 if tenant.iban == val:
-                    print('we have a fucking match', payment)
+                    new_payment = Payment(
+                        iban=payment['Tegenrekening'],
+                        amount=float(str(payment['Bedrag (EUR)']).replace(",", ".")), account_holder=payment['Naam / Omschrijving'],
+                        payment_json=payment,
+                        date=str(payment['Datum']),
+                        tenant_id=tenant.id
+                    )
+                    db.session.add(new_payment)
+                    db.session.commit()
 
+    @classmethod
     def get_tenants(self):
         tenants = Tenant.query.all()
         return tenants
-
-
-loaded_file = json.loads(open(
-    "/Users/RaptorHezuzNinya/code/python/real_estate_API/data/csvjson.json").read())
-p = Parser(loaded_file)
-p.check_payments()
-# p.get_tenants()

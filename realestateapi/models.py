@@ -19,9 +19,10 @@ class Tenant(db.Model):
 class Payment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     iban = db.Column(db.String(40), nullable=False)
-    rent = db.Column(db.Float, nullable=False)
-    account_holder = db.Column(db.String(45), nullable=False)
+    amount = db.Column(db.Float, nullable=False)
+    account_holder = db.Column(db.String(150), nullable=False)
     payment_json = db.Column(db.JSON, nullable=False)
+    date = db.Column(db.Date, nullable=False)
     tenant_id = db.Column(db.Integer, db.ForeignKey(
         'tenant.id'), nullable=False)
 
@@ -33,7 +34,7 @@ class Upload(db.Model):
     __tablename__ = "json_upload"
     id = db.Column(db.Integer, primary_key=True)
     json_file = db.Column(db.JSON)
-    uploaded_at = db.Column(db.DateTime('GMT'))
+    uploaded_at = db.Column(db.Date)
 
     def __init__(self, json_file, uploaded_at):
         self.json_file = json_file

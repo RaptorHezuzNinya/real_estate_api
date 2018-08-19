@@ -17,15 +17,13 @@ def upload_file():
         file = request.files['file']
         json_data = json.load(file)
         datetime_now = datetime.datetime.now()
-        new_json = Upload(json_file=json_data, uploaded_at=datetime_now)
-        db.session.add(new_json)
+        new_upload = Upload(json_file=json_data, uploaded_at=datetime_now)
+        db.session.add(new_upload)
         db.session.commit()  # new json upload is now in db;
-
-        # last = Upload.query.last()
-        # return render_template('success.html', var=last.__dict__)
-        descending = Upload.query.order_by(Upload.id.desc())
-        last_upload = descending.first()
-        # parser = Parser()
+        all_uploads_desc = Upload.query.order_by(Upload.id.desc())
+        last_upload = all_uploads_desc.first()
+        p = Parser(last_upload.json_file)
+        p.loop_payments()
         return jsonify(last_upload.json_file)
 
 
