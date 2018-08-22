@@ -39,19 +39,24 @@ def is_csv(file_name):
 
 def handle_csv(path):
     c2j = Csv2json(path)
-    result = c2j.get_json()
-    return jsonify(output=result)
+    json_list = c2j.get_json()
+    return insert_db(json_list)
 
 
 def handle_json(file):
     json_list = json.load(file)
+    return insert_db(json_list)
+
+    # all_uploads_desc = Upload.query.order_by(Upload.id.desc())
+    # last_upload = all_uploads_desc.first()
+    # p = Parser(last_upload.json_file)
+    # p.loop_payments()
+
+
+def insert_db(payments_json):
     datetime_now = datetime.datetime.now()
-    new_upload = Upload(json_file=json_list, uploaded_at=datetime_now)
+    # change column name to something else its list with dict json objects  UPLOAD_CONTENT
+    new_upload = Upload(json_file=payments_json, uploaded_at=datetime_now)
     db.session.add(new_upload)
-    db.session.commit()  # new json upload is now in db;
-    all_uploads_desc = Upload.query.order_by(Upload.id.desc())
-    last_upload = all_uploads_desc.first()
-    p = Parser(last_upload.json_file)
-    p.loop_payments()
-    j = last_upload.json_file
-    return jsonify(output=j)
+    db.session.commit()  # new js
+    return 'sucess uniconr'
