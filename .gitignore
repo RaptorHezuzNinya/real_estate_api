@@ -4,7 +4,8 @@ venv
 .vscode
 real_estate_API_venv
 /README.md
-notes.md
+notes.txt
 /data
 runServer.sh
 __pycache__
+/uploads

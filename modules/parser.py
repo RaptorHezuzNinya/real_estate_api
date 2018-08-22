@@ -21,7 +21,9 @@ class Parser:
                 if tenant.iban == val:
                     new_payment = Payment(
                         iban=payment['Tegenrekening'],
-                        amount=float(str(payment['Bedrag (EUR)']).replace(",", ".")), account_holder=payment['Naam / Omschrijving'],
+                        amount=float(
+                            str(payment['Bedrag (EUR)']).replace(",", ".")),
+                        account_holder=payment['Naam / Omschrijving'],
                         payment_json=payment,
                         date=str(payment['Datum']),
                         tenant_id=tenant.id
