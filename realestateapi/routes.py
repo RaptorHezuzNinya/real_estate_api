@@ -12,7 +12,7 @@ import os
 def get_tenants():
     tenant = Tenant()
     tenants = tenant.query.all()
-    return jsonify(output=tenants[0])
+    return jsonify(data=[t.serialize for t in tenants])
 
 
 @app.route('/')
