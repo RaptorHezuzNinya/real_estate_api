@@ -37,7 +37,8 @@ def upload_file():
 
 
 def save_file(file, path):
-    return file.save(path)  # file is saved to uploads dir
+    # if file is saved succesfull rm content of uploads folder
+    return file.save(path)  # file is saved to uploads dir 
 
 
 def is_csv(file_name):
