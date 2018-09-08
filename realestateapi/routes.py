@@ -25,8 +25,8 @@ def upload_file():
     if request.method == 'POST':
         file = request.files['file']
 
-        if is_csv(file.filename):
-            cwd = os.getcwd()
+        if is_csv(file.filename): 
+            cwd = os.getcwd() # NOTE need to add check if folder exists
             path = cwd + '/uploads/' + file.filename
 
             save_file(file, path)
