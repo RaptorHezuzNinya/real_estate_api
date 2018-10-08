@@ -20,6 +20,10 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/payments/by_month', methods=['get'])
+def get_payments_by_month():
+    pass
+
 @app.route('/uploadfile', methods=['POST'])
 def upload_file():
     if request.method == 'POST':
