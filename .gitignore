@@ -9,4 +9,4 @@ notes.txt
 runServer.sh
 __pycache__
 /uploads
-./vscode
+.vscode
