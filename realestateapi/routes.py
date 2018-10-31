@@ -7,6 +7,15 @@ import json
 import datetime
 import os
 
+# need route that gets all the payments for 1 specific tenant
+
+
+@app.route('/tenant/<int:id>/payments')
+def get_tenant_payments():
+    Payment().query.all(filter())
+    pass
+    #  need id route and query to get WHERE clause
+
 
 @app.route('/tenants')
 def get_tenants():
@@ -34,6 +43,8 @@ def upload_file():
             return handle_csv(path)
 
         return handle_json(file)
+
+#  extract this to upload_file module??
 
 
 def save_file(file, path):
