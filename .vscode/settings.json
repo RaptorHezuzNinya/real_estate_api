@@ -1,9 +1,0 @@
-{
-    "python.pythonPath": "${workspaceFolder}/real_estate_API_venv/bin/python",
-    "files.exclude": {
-        "__pycache__": true
-    },
-    "editor.fontSize": 12,
-    "terminal.integrated.shell.osx": "/bin/zsh",
-    "editor.fontFamily": "FiraCode-Light"
-}
