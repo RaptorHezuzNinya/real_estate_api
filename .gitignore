@@ -5,5 +5,5 @@ notes.txt
 /data
 runServer.sh
 __pycache__
-.vscode
+/.vscode
 /uploads
