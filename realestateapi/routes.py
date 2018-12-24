@@ -7,8 +7,6 @@ import json
 import datetime
 import os
 
-# need route that gets all the payments for 1 specific tenant
-
 
 @app.route('/tenant/<int:id>/payments')
 def get_tenant_payments():
