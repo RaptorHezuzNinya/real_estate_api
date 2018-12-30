@@ -1,8 +1,7 @@
-venv
-real_estate_API_venv
 /README.md
+# /data
+.vscode
+# /uploads
+real_estate_API_venv
 notes.txt
-/data
-runServer.sh
-__pycache__
-/uploads
+# __pycache__

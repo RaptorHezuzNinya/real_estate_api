@@ -52,7 +52,6 @@ class Tenant(db.Model):
             'rent': self.rent,
             'phone': self.phone
         }
-    
+
     # def __repr__(self):
     #     return f"Tenant('{self.id}','{self.account_holder}', '{self.first_name}','{self.last_name}','{self.iban}','{self.rent}','{self.phone}')"
-                
