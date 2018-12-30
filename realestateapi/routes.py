@@ -31,13 +31,14 @@ def index():
 def get_payments_by_month():
     pass
 
+
 @app.route('/uploadfile', methods=['POST'])
 def upload_file():
     if request.method == 'POST':
         file = request.files['file']
 
-        if is_csv(file.filename): 
-            cwd = os.getcwd() # NOTE need to add check if folder exists
+        if is_csv(file.filename):
+            cwd = os.getcwd()  # NOTE need to add check if folder exists
             path = cwd + '/uploads/' + file.filename
 
             save_file(file, path)
@@ -51,7 +52,7 @@ def upload_file():
 
 def save_file(file, path):
     # if file is saved succesfull rm content of uploads folder
-    return file.save(path)  # file is saved to uploads dir 
+    return file.save(path)  # file is saved to uploads dir
 
 
 def is_csv(file_name):
