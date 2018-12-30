@@ -1,8 +1,11 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 import platform
 
 app = Flask(__name__)
+CORS(app)
+
 
 if platform.system() == 'Darwin':
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/real_estate_api' #macOs
