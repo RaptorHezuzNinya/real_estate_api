@@ -37,6 +37,9 @@ class Tenant(db.Model):
     iban = db.Column(db.String(35), nullable=False)
     rent = db.Column(db.Float)
     phone = db.Column(db.String(12))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    # user_id = db.Column(db.Integer, db.ForeignKey(
+    #     'user.id'), nullable=False)
 
     @property
     def serialize(self):
