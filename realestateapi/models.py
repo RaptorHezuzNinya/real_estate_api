@@ -1,33 +1,31 @@
 from realestateapi import db
 from sqlalchemy import event, DDL
+from sqlalchemy_utils import PasswordType, force_auto_coercion
+
+force_auto_coercion()
 
 
-class Payment(db.Model):
+class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    iban = db.Column(db.String(40), nullable=False)
-    amount = db.Column(db.Float, nullable=False)
-    account_holder = db.Column(db.String(150), nullable=False)
-    payment_json = db.Column(db.JSON, nullable=False)
-    date = db.Column(db.Date, nullable=False)
-    tenant_id = db.Column(db.Integer, db.ForeignKey(
-        'tenant.id'), nullable=False)
+    email = db.Column(db.String(120), unique=True)
+    password = db.Column(PasswordType(
+        schemes=[
+            'pbkdf2_sha512',
+            'md5_crypt'
+        ],
+        deprecated=['md5_crypt']
+    ),
+        unique=False,
+        nullable=False,
+    )
+    first_name = db.Column(db.String(25))
+    last_name = db.Column(db.String(35))
+    tenants = db.relationship("Tenant")
+    uploads = db.relationship("Uploads")
 
-    def __repr__(self):
-        return f"Payment('{self.id}', '{self.iban}, '{self.rent}','{self.account_holder}')"
 
-
-class Upload(db.Model):
-    __tablename__ = "json_upload"
-    id = db.Column(db.Integer, primary_key=True)
-    upload_content = db.Column(db.JSON)
-    uploaded_at = db.Column(db.Date)
-
-    def __init__(self, upload_content, uploaded_at):
-        self.upload_content = upload_content
-        self.uploaded_at = uploaded_at
-
-    def __repr__(self):
-        return f"Upload('{self.id}', '{self.upload_content}')"
+event.listen(User.__table__, 'after_create',
+             DDL(""" INSERT INTO "user" (email, password, first_name, last_name) VALUES ('ward.verhoef@gmail.com', 'password', 'ward', 'verhoef')  """))
 
 
 class Tenant(db.Model):
