@@ -23,9 +23,7 @@ class User(db.Model):
     tenants = db.relationship("Tenant")
     uploads = db.relationship("Uploads")
 
-
-event.listen(User.__table__, 'after_create',
-             DDL(""" INSERT INTO "user" (email, password, first_name, last_name) VALUES ('ward.verhoef@gmail.com', 'password', 'ward', 'verhoef')  """))
+# here event listener for user 'after-create'
 
 
 class Tenant(db.Model):
@@ -38,8 +36,6 @@ class Tenant(db.Model):
     rent = db.Column(db.Float)
     phone = db.Column(db.String(12))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    # user_id = db.Column(db.Integer, db.ForeignKey(
-    #     'user.id'), nullable=False)
 
     @property
     def serialize(self):
@@ -54,5 +50,34 @@ class Tenant(db.Model):
             'phone': self.phone
         }
 
-    # def __repr__(self):
-    #     return f"Tenant('{self.id}','{self.account_holder}', '{self.first_name}','{self.last_name}','{self.iban}','{self.rent}','{self.phone}')"
+
+# event.listen for Tenant after-create see notes.txt(local)
+
+
+class Upload(db.Model):
+    __tablename__ = "json_upload"
+    id = db.Column(db.Integer, primary_key=True)
+    upload_content = db.Column(db.JSON)
+    uploaded_at = db.Column(db.Date)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    def __init__(self, upload_content, uploaded_at):
+        self.upload_content = upload_content
+        self.uploaded_at = uploaded_at
+
+    def __repr__(self):
+        return f"Upload('{self.id}', '{self.upload_content}')"
+
+
+class Payment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    iban = db.Column(db.String(40), nullable=False)
+    amount = db.Column(db.Float, nullable=False)
+    account_holder = db.Column(db.String(150), nullable=False)
+    payment_json = db.Column(db.JSON, nullable=False)
+    date = db.Column(db.Date, nullable=False)
+    tenant_id = db.Column(db.Integer, db.ForeignKey(
+        'tenant.id'), nullable=False)
+
+    def __repr__(self):
+        return f"Payment('{self.id}', '{self.iban}, '{self.rent}','{self.account_holder}')"

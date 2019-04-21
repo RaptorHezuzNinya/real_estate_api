@@ -1,7 +1,6 @@
 /README.md
 # /data
-.vscode
 # /uploads
 real_estate_API_venv
 notes.txt
-# __pycache__
+/realestateapi/__pycache__
