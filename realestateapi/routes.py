@@ -7,6 +7,19 @@ import json
 import datetime
 import os
 
+# home
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+
+# tenant routes
+@app.route('/tenants')
+def get_tenants():
+    tenant = Tenant()
+    tenants = tenant.query.all()
+    return jsonify([t.serialize for t in tenants])
+
 
 @app.route('/tenant/<int:id>/payments')
 def get_tenant_payments():
@@ -15,18 +28,7 @@ def get_tenant_payments():
     #  need id route and query to get WHERE clause
 
 
-@app.route('/tenants')
-def get_tenants():
-    tenant = Tenant()
-    tenants = tenant.query.all()
-    return jsonify([t.serialize for t in tenants])
-
-
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-
+# payment routes
 @app.route('/payments/by_month', methods=['get'])
 def get_payments_by_month():
     pass
@@ -47,9 +49,8 @@ def upload_file():
 
         return handle_json(file)
 
+
 #  extract this to upload_file module??
-
-
 def save_file(file, path):
     # if file is saved succesfull rm content of uploads folder
     return file.save(path)  # file is saved to uploads dir
