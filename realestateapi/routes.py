@@ -12,26 +12,12 @@ import os
 def index():
     return render_template('index.html')
 
-
 # tenant routes
 @app.route('/tenants')
 def get_tenants():
     tenant = Tenant()
     tenants = tenant.query.all()
     return jsonify([t.serialize for t in tenants])
-
-
-@app.route('/tenant/<int:id>/payments')
-def get_tenant_payments():
-    Payment().query.all(filter())
-    pass
-    #  need id route and query to get WHERE clause
-
-
-# payment routes
-# @app.route('/payments/by_month', methods=['get'])
-# def get_payments_by_month():
-#     pass
 
 
 @app.route('/uploadfile', methods=['POST'])
