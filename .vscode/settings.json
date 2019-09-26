@@ -4,11 +4,6 @@
   "python.linting.lintOnSave": true,
   "python.pythonPath": "/usr/local/opt/python/bin/python3.7",
   "files.exclude": {
-    "**/.vscode": true,
-    "README.md": true,
-    "**/real_estate_API_venv": true,
-    "**/notes.txt": true,
-    "realestateapi/__pycache__": true,
-    "**/__pycache__": true
+    "**/.vscode": true
   }
 }
