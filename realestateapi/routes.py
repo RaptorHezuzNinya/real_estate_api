@@ -3,6 +3,7 @@ from realestateapi.models import Tenant, Payment, Upload
 from realestateapi import app, db
 from modules.parser import Parser
 from modules.csv2json import Csv2json
+from modules.file_upload import FileUpload
 import json
 import datetime
 import os
@@ -12,7 +13,6 @@ import os
 def index():
     return render_template('index.html')
 
-
 # tenant routes
 @app.route('/tenants')
 def get_tenants():
@@ -20,18 +20,19 @@ def get_tenants():
     tenants = tenant.query.all()
     return jsonify([t.serialize for t in tenants])
 
-
-@app.route('/tenant/<int:id>/payments')
-def get_tenant_payments():
-    Payment().query.all(filter())
-    pass
-    #  need id route and query to get WHERE clause
-
-
 # payment routes
-# @app.route('/payments/by_month', methods=['get'])
-# def get_payments_by_month():
-#     pass
+@app.route('/payments')
+def get_payments():
+    payment = Payment()
+    payments = payment.query.all()
+    return jsonify([t.serialize for t in payments])
+
+
+@app.route('/payments/<int:tenant_id>')
+def get_payments_by_tenant_id(tenant_id):
+    payment = Payment()
+    payments = payment.query.filter_by(tenant_id=tenant_id)
+    return jsonify([t.serialize for t in payments])
 
 
 @app.route('/uploadfile', methods=['POST'])
@@ -42,18 +43,12 @@ def upload_file():
         if is_csv(file.filename):
             cwd = os.getcwd()  # NOTE need to add check if folder exists
             path = cwd + '/uploads/' + file.filename
-
-            save_file(file, path)
+            file_upload = FileUpload(file)
+            file_upload.save_file(path)
 
             return handle_csv(path)
 
         return handle_json(file)
-
-
-#  extract this to upload_file module??
-def save_file(file, path):
-    # if file is saved succesfull rm content of uploads folder
-    return file.save(path)  # file is saved to uploads dir
 
 
 def is_csv(file_name):
@@ -82,7 +77,8 @@ def run_parser():
 
 def insert_db(payments_json):
     datetime_now = datetime.datetime.now()
-    new_upload = Upload(upload_content=payments_json, uploaded_at=datetime_now)
+    new_upload = Upload(upload_content=payments_json,
+                        uploaded_at=datetime_now)
     db.session.add(new_upload)
     db.session.commit()
     return 'upload successful'
