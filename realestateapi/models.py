@@ -93,5 +93,17 @@ class Payment(db.Model):
     tenant_id = db.Column(db.Integer, db.ForeignKey(
         'tenant.id'), nullable=False)
 
-    def __repr__(self):
-        return f"Payment('{self.id}', '{self.iban}, '{self.rent}','{self.account_holder}')"
+    @property
+    def serialize(self):
+        return {
+            'id': self.id,
+            'iban': self.iban,
+            'amount': self.amount,
+            'account_holder': self.account_holder,
+            'payment_json': self.payment_json,
+            'date': self.date,
+            'tenant_id': self.tenant_id
+        }
+
+    # def __repr__(self):
+    #     return f"Payment('{self.id}', '{self.iban}, '{self.rent}','{self.account_holder}')"
