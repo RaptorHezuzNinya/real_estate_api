@@ -3,6 +3,7 @@ from realestateapi.models import Tenant, Payment, Upload
 from realestateapi import app, db
 from modules.parser import Parser
 from modules.csv2json import Csv2json
+from modules.file_upload import FileUpload
 import json
 import datetime
 import os
