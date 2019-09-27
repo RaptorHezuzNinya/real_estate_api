@@ -6,3 +6,4 @@ notes.txt
 /realestateapi/__pycache__
 __pycache__
 .DS_Store
+/docs
