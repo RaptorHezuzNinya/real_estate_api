@@ -20,6 +20,20 @@ def get_tenants():
     tenants = tenant.query.all()
     return jsonify([t.serialize for t in tenants])
 
+# payment routes
+@app.route('/payments')
+def get_payments():
+    payment = Payment()
+    payments = payment.query.all()
+    return jsonify([t.serialize for t in payments])
+
+
+@app.route('/payments/<int:tenant_id>')
+def get_payments_by_tenant_id(tenant_id):
+    payment = Payment()
+    payments = payment.query.filter_by(tenant_id=tenant_id)
+    return jsonify([t.serialize for t in payments])
+
 
 @app.route('/uploadfile', methods=['POST'])
 def upload_file():
@@ -29,18 +43,12 @@ def upload_file():
         if is_csv(file.filename):
             cwd = os.getcwd()  # NOTE need to add check if folder exists
             path = cwd + '/uploads/' + file.filename
-
-            save_file(file, path)
+            file_upload = FileUpload(file)
+            file_upload.save_file(path)
 
             return handle_csv(path)
 
         return handle_json(file)
-
-
-#  extract this to upload_file module??
-def save_file(file, path):
-    # if file is saved succesfull rm content of uploads folder
-    return file.save(path)  # file is saved to uploads dir
 
 
 def is_csv(file_name):
