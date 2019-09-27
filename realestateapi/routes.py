@@ -77,7 +77,8 @@ def run_parser():
 
 def insert_db(payments_json):
     datetime_now = datetime.datetime.now()
-    new_upload = Upload(upload_content=payments_json, uploaded_at=datetime_now)
+    new_upload = Upload(upload_content=payments_json,
+                        uploaded_at=datetime_now)
     db.session.add(new_upload)
     db.session.commit()
     return 'upload successful'
