@@ -14,28 +14,28 @@ def index():
     return render_template('index.html')
 
 # tenant routes
-@app.route('/tenants')
+@app.route('/tenants/')
 def get_tenants():
     tenant = Tenant()
     tenants = tenant.query.all()
     return jsonify([t.serialize for t in tenants])
 
+
+@app.route('/tenants/<int:id>/payments/')
+def get_tenant_payments(id):
+    payment = Payment()
+    payments = payment.query.filter_by(tenant_id=id)
+    return jsonify([t.serialize for t in payments])
+
 # payment routes
-@app.route('/payments')
+@app.route('/payments/')
 def get_payments():
     payment = Payment()
     payments = payment.query.all()
     return jsonify([t.serialize for t in payments])
 
 
-@app.route('/payments/<int:tenant_id>')
-def get_payments_by_tenant_id(tenant_id):
-    payment = Payment()
-    payments = payment.query.filter_by(tenant_id=tenant_id)
-    return jsonify([t.serialize for t in payments])
-
-
-@app.route('/uploadfile', methods=['POST'])
+@app.route('/uploadfile/', methods=['POST'])
 def upload_file():
     if request.method == 'POST':
         file = request.files['file']
