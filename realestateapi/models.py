@@ -3,8 +3,6 @@ from sqlalchemy import event, DDL
 from sqlalchemy_utils import PasswordType, force_auto_coercion
 
 # force_auto_coercion()
-
-
 # class User(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)
 #     email = db.Column(db.String(120), unique=True)
@@ -105,5 +103,8 @@ class Payment(db.Model):
             'tenant_id': self.tenant_id
         }
 
+
     # def __repr__(self):
     #     return f"Payment('{self.id}', '{self.iban}, '{self.rent}','{self.account_holder}')"
+{"Datum": "20180702", "Naam / Omschrijving": "M. Eising eo", "Rekening": "NL46INGB0701357983", "Tegenrekening": "NL40RABO0184147433", "Code": "OV", "Af Bij": "Bij",
+    "Bedrag (EUR)": "752,76", "MutatieSoort": "Overschrijving", "Mededelingen": "Naam: M. Eising eo IBAN: NL40RABO0184147433 Valutadatum: 02-07-2018"}
